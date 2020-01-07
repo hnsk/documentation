@@ -21,7 +21,7 @@ jobs:
       uses: dovecot/rsync-deployments@master
       with:
         RSYNC_OPTIONS: -azr --delete
-        RSYNC_TARGET: /home/docs/public_html/.
+        RSYNC_TARGET: docs@talvi.dovecot.org:public_html/.
         RSYNC_BASE_DIR: _build/.
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
