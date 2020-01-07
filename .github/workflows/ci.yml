@@ -13,3 +13,15 @@ jobs:
       with:
          repo-token: "${{ secrets.GITHUB_TOKEN }}"
          args: "."
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy documentation
+      uses: dovecot/rsync-deployments@master
+      with:
+        RSYNC_OPTIONS: -azr --delete
+        RSYNC_TARGET: /home/docs/public_html/.
+        RSYNC_BASE_DIR: _build/.
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
